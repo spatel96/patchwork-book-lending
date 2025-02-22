@@ -25,4 +25,14 @@ class LibraryTest {
         assertFalse(library.borrowBook("9780753555200"))
         assertEquals(1, library.getBorrowedBooksCount())
     }
+
+    @Test
+    fun testBorrowingReferenceBook() {
+        val library = Library()
+        val book = Book("Peter Thiel with Blake Masters", "9780753555200", isReference = true, isBorrowed = false, "Zero To One")
+        library.addBook(book)
+
+        assertFalse(library.borrowBook("9780753555200"))
+        assertEquals(0, library.getBorrowedBooksCount())
+    }
 }
