@@ -10,6 +10,8 @@ class LibraryTest {
         val book = Book("Peter Thiel with Blake Masters", "9780753555200", isReference = true, isBorrowed = true, "Zero To One")
         library.addBook(book)
 
-        println(listOf(book))
+        assertEquals(listOf(book), library.findBooksByAuthor("Peter Thiel with Blake Masters"))
+        assertEquals(listOf(book), library.findBooksByTitle("Zero To One")) 
+        assertEquals(book, library.findBooksByIsbn("9780753555200"))            
     }
 }
