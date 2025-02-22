@@ -23,4 +23,19 @@ class Library {
     fun findBooksByIsbn(isbn: String): Book? {
         return books.find { it.isbn == isbn }
     }
+
+    fun borrowBook(isbn: String): Boolean {
+        val book = findBooksByIsbn(isbn)
+        return if (book != null && !book.isReference && !book.isBorrowed) {
+            book.isBorrowed = true
+            borrowedBooks.add(book)
+            true
+        } else {
+            false
+        }
+    }
+
+    fun getBorrowedBooksCount(): Int {
+        return borrowedBooks.size
+    }
 }
