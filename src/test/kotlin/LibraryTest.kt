@@ -5,13 +5,29 @@ import kotlin.test.assertTrue
 
 class LibraryTest {
     @Test
-    fun testAddAndFindBooks() {
+    fun testAddAndFindBooksByAuthor() {
         val library = Library()
         val book = Book("Peter Thiel with Blake Masters", "9780753555200", isReference = true, isBorrowed = true, "Zero To One")
         library.addBook(book)
 
         assertEquals(listOf(book), library.findBooksByAuthor("Peter Thiel with Blake Masters"))
+    }
+
+    @Test
+    fun testAddAndFindBooksByTitle() {
+        val library = Library()
+        val book = Book("Peter Thiel with Blake Masters", "9780753555200", isReference = true, isBorrowed = true, "Zero To One")
+        library.addBook(book)
+
         assertEquals(listOf(book), library.findBooksByTitle("Zero To One")) 
+    }
+
+    @Test
+    fun testAddAndFindBooksByISBN() {
+        val library = Library()
+        val book = Book("Peter Thiel with Blake Masters", "9780753555200", isReference = true, isBorrowed = true, "Zero To One")
+        library.addBook(book)
+
         assertEquals(book, library.findBooksByIsbn("9780753555200"))            
     }
 
@@ -21,6 +37,18 @@ class LibraryTest {
         val book = Book("Peter Thiel with Blake Masters", "9780753555200", isReference = false, isBorrowed = false, "Zero To One")
         library.addBook(book)
 
+        assertTrue(library.borrowBook("9780753555200"))
+        assertFalse(library.borrowBook("9780753555200"))
+        assertEquals(1, library.getBorrowedBooksCount())
+    }
+
+    @Test
+    fun testBorrowBookCount() {
+        val library = Library()
+        val book = Book("Peter Thiel with Blake Masters", "9780753555200", isReference = false, isBorrowed = false, "Zero To One")
+        library.addBook(book)
+
+        assertEquals(0, library.getBorrowedBooksCount())
         assertTrue(library.borrowBook("9780753555200"))
         assertFalse(library.borrowBook("9780753555200"))
         assertEquals(1, library.getBorrowedBooksCount())
