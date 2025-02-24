@@ -16,6 +16,18 @@ dependencies {
 
 tasks.test {
     useJUnitPlatform()
+
+    testLogging {
+        lifecycle {
+            showExceptions = true
+            showCauses = true
+            showStackTraces = true
+            showStandardStreams = true
+        }
+        info.events = lifecycle.events
+        info.exceptionFormat = lifecycle.exceptionFormat
+        showStandardStreams = true
+    }
 }
 
 application {
